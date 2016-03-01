@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1456858908 source:z:\cs250\assignment5\main.cpp
+	<iostream>
+	<iomanip>
+	<string.h>
+	<cstdlib>
+

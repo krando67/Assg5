@@ -1,0 +1,75 @@
+void PrintIt() 
+{
+	//*initialize state variables
+	int i;
+	string combination = "";
+	//*if combinations token is 1 print *
+	//*if combinations token is 0 print |
+	//*append tokens to variable
+	for (i=1; i <= n; i++)
+	{
+		if( a[i] == 1 )
+		{
+			combination = combination + "*";
+		}
+		else
+		{
+			combination = combination + "|";
+		}
+	}
+	cout << combination << endl;
+}
+
+----------------------------------------------------------
+
+/*
+* Recursive algorithm for generating combinations
+*
+* Given nCk (n combination k ) or (n choose k)
+* @param n: number of elements
+* @param k: number of stars
+*/
+
+
+// credit to: http://theory.cs.uvic.ca/inf/comb/CombinationsInfo.html - start
+void Comb(int n, int k, int j = 1, int m = 0) 
+{
+	if (j > n)
+	{
+		PrintIt();
+	}
+	else 
+	{
+		if (k-m < n-j+1) 
+		{
+			a[j] = 0; 
+			Comb(n, k, j+1, m);
+		}
+		if (m<k) 
+		{
+			a[j] = 1; 
+			Comb(n, k, j+1, m+1);
+		}
+	}
+}
+
+----------------------------------
+RANDOM NUMBER GENERATOR
+------------------------------------
+
+//precondition: random generator must be seeded once (e.g inside //main())
+/*
+* Generates a random number between 0 and nmax-1
+*
+* @param nmax: the maximum range
+* @return: A random number between 0 and nmax-1
+*/
+int genRandomNumber(int nmax)
+{
+	return rand() % nmax;
+}
+
+
+//Video Reference for Random number Generator.
+//https://www.youtube.com/watch?v=Wh-dFCpVQyY
+//https://www.youtube.com/watch?v=naXUIEAIt4U
