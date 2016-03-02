@@ -4,6 +4,10 @@
 #include <cstdlib>
 
 using namespace std;
+int a[6];
+string combOut[6];
+int numOfComb(int n, int k);
+int guessesGiven(int numOfComb);
 
 void printHorizontalLine( int width, char border_char )
 {
@@ -14,14 +18,16 @@ void printHorizontalLine( int width, char border_char )
 
 //Play the Stars and Bars game
     //*Initialize game
-void PrintIt(int n, bool a[])
+void PrintIt(int n, int k, int a[])
 {//a[i] is the array that will be printed so int a[6];
 	//*initialize state variables
 	int i;
-	string combination = "";
+
+    string combination;
 	//*if combinations token is 1 print *
 	//*if combinations token is 0 print |
 	//*append tokens to variable
+
 	for (i=1; i <= n; i++)
 	{
 		if( a[i] == 1 )
@@ -33,7 +39,11 @@ void PrintIt(int n, bool a[])
 			combination = combination + "|";
 		}
 	}
-	cout << combination << endl;
+    cout << combination << endl;
+
+	//for (int l = 0; l < guessesGiven(nOfR); l++){
+
+	//}
 }
 /*
 * Recursive algorithm for generating combinations
@@ -44,10 +54,9 @@ void PrintIt(int n, bool a[])
 */
 void Comb(int n, int k, int j = 1, int m = 0)
 {
-    bool a[n];
 	if (j > n)
 	{
-		PrintIt(n, a);
+		PrintIt(n, k, a);
 	}
 	else
 	{
@@ -56,7 +65,7 @@ void Comb(int n, int k, int j = 1, int m = 0)
 			a[j] = 0;
 			Comb(n, k, j+1, m);
 		}
-		 if (m<k)
+        if (m<k)
 		{
 			a[j] = 1;
 			Comb(n, k, j+1, m+1);
@@ -78,22 +87,30 @@ void Comb(int n, int k, int j = 1, int m = 0)
                     int l = n-k;
                     int top = 1;
                     int bottom = 1;
-                for (n; n>k; n--){top = top * n;}
-                for (l; l>0;l--){bottom = bottom * l;}
+                for (n; n>k; n--)
+                    {
+                        top = top * n;
+                    }
+                for (l; l>0;l--)
+                    {
+                        bottom = bottom * l;
+                    }
                 return top/bottom;
                 }
-                //****The number of guesses must be between 2 and half of the total number of combinations
+                //****The number of guesses given must be between 2 and half of the total number of combinations
                     //*****Random number generator
-                    int guessesGiven(int numofComb){
-                    int random = rand() % (numofComb/2);
+                    int guessesGiven(int numOfComb){
+                    int random = rand() % (numOfComb/2);
                         //******if RN<2, RN = 2
                         if (random < 2)
                             {return 2;}
                         else
                             {return random;}
                     }
+
         //**Ask user for next guess
         void userGuess(){
+
             //***Output text asking for next guess
             cout << "Enter next sequence: ";
             //**Get guess
@@ -119,6 +136,7 @@ void Comb(int n, int k, int j = 1, int m = 0)
 
 int main()
 {
+    //cout << guessesGiven(6) << endl;
     Comb(6,5);
     return 0;
 }
